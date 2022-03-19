@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 class loginPage extends StatefulWidget {
 
   loginPage({Key? key}) : super(key: key);
-
   @override
   State<loginPage> createState() => _loginPageState();
 }
@@ -54,31 +53,24 @@ class _loginPageState extends State<loginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    for (var i = 1; i < 4; i++) _buildButton2(num: i),
+                    for (var i = 1; i <=3 ; i++) _buildButton2(num: i),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    for (var i = 4; i < 7; i++) _buildButton2(num: i),
+                    for (var i = 4; i <= 6; i++) _buildButton2(num: i),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    for (var i = 7; i < 10; i++) _buildButton2(num: i),
+                    for (var i = 7; i <= 9; i++) _buildButton2(num: i),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: buttonSize,
-                        width: buttonSize,
-                      ),
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -90,24 +82,9 @@ class _loginPageState extends State<loginPage> {
                           ),
                         ),
                         _buildButton2(num: 0),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: 75.0,
-                            height: 75.0,
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.backspace_outlined,
-                                color: Colors.red,
-                              ),
-                              iconSize: 50.0,
-                            ),
-                          ),
-                        ),
+                        _buildButton2(num: -1),
                       ],
                     ),
-                    _buildButton2(num: -1),
                   ],
                 ),
                 Row(
@@ -142,6 +119,8 @@ class _loginPageState extends State<loginPage> {
         border: Border.all(color: Colors.red, width: 2.0),
         borderRadius: BorderRadius.circular(16.0),
       );
+    }else {
+      child = Icon(Icons.backspace, size: 30.0,color: Colors.red,);
     }
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -152,7 +131,7 @@ class _loginPageState extends State<loginPage> {
               _inputPIN += '$num';
             }
             else
-              _inputPIN = _inputPIN.substring(0, _inputPIN.length - 1);
+              _inputPIN = _inputPIN.substring(0, _inputPIN.length -1);
           });
           checkPin();
         },
@@ -169,7 +148,7 @@ class _loginPageState extends State<loginPage> {
   }
   checkPin() async {
     if (_inputPIN.length == 6) {
-      final url = Uri.parse("https://cpsu-test-api.herokuapp.com/login%22");
+      final url = Uri.parse("https://cpsu-test-api.herokuapp.com/login");
         final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
